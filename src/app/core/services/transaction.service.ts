@@ -43,7 +43,7 @@ export class TransactionService {
         .reduce((sum: number, t: Transaction) => sum + t.amount, 0)
       );
 
-        readonly totalExpense = computed(() =>
+      readonly totalExpense = computed(() =>
       this._transactions()
         .filter((t): t is Transaction => t.type === 'expense')
         .reduce((sum: number, t: Transaction) => sum + t.amount, 0)

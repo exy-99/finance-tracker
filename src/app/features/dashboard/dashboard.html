@@ -1,1 +1,136 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+  <h1 class="dashboard-title">Dashboard</h1>
+
+  <!-- Summary Cards -->
+  <div class="summary-grid">
+    <div class="card card--income">
+      <p class="card-label">Total Income</p>
+      <p class="card-value card-value--income">
+        {{ service.totalIncome() | currency }}
+      </p>
+    </div>
+
+    <div class="card card--expense">
+      <p class="card-label">Total Expense</p>
+      <p class="card-value card-value--expense">
+        {{ service.totalExpense() | currency }}
+      </p>
+    </div>
+
+    <div class="card card--balance">
+      <p class="card-label">Balance</p>
+      <p class="card-value">
+        {{ service.balance() | currency }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Add Transaction Form -->
+  <section class="form-section">
+    <h2 class="section-title">Add Transaction</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="transaction-form">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="amount">Amount</label>
+          <input
+            id="amount"
+            type="number"
+            step="0.01"
+            formControlName="amount"
+            placeholder="0.00"
+          />
+          @if (amount?.invalid && amount.touched) {
+            <span class="error">
+              @if (amount.hasError('required')) { Amount is required }
+              @if (amount.hasError('min')) { Must be greater than 0 }
+            </span>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="category">Category</label>
+          <input
+            id="category"
+            type="text"
+            formControlName="category"
+            placeholder="e.g. Groceries"
+          />
+          @if (category?.invalid && category.touched) {
+            <span class="error">
+              @if (category.hasError('required')) { Category is required }
+              @if (category.hasError('maxlength')) { Max 30 characters }
+            </span>
+          }
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="type">Type</label>
+          <select id="type" formControlName="type">
+            <option value="" disabled>Select type</option>
+            @for (t of TransactionType; track t) {
+              <option [value]="t">{{ t | titlecase }}</option>
+            }
+          </select>
+          @if (type?.invalid && type.touched) {
+            <span class="error">Type is required</span>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="date">Date</label>
+          <input id="date" type="date" formControlName="date" />
+          @if (date?.invalid && date.touched) {
+            <span class="error">Date is required</span>
+          }
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="description">Description (optional)</label>
+        <input
+          id="description"
+          type="text"
+          formControlName="description"
+          placeholder="e.g. Weekly grocery run"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn--primary"
+        [disabled]="form.invalid"
+      >
+        Add Transaction
+      </button>
+    </form>
+  </section>
+
+  <!-- Recent Transactions -->
+  <section class="recent">
+    <h2 class="section-title">Recent Transactions</h2>
+
+    <ul class="transaction-list">
+      @for (t of service.transaction(); track t.id) {
+        <li class="transaction-item">
+          <div class="transaction-main">
+            <span class="transaction-desc">{{ t.description || t.category }}</span>
+            <span
+              class="transaction-amount"
+              [class.transaction-amount--income]="t.type === 'income'"
+              [class.transaction-amount--expense]="t.type === 'expense'"
+            >
+              {{ t.amount | currency }}
+            </span>
+          </div>
+          <div class="transaction-meta">
+            <span class="transaction-category">{{ t.category }}</span>
+            <span class="transaction-date">{{ t.date | date:'mediumDate' }}</span>
+          </div>
+        </li>
+      }
+    </ul>
+  </section>
+</div>
