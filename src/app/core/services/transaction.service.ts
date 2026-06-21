@@ -50,6 +50,7 @@ export class TransactionService {
       );
 
       readonly balance = computed(() => this.totalIncome() - this.totalExpense());
+TransactionService: any;
 
       //method to add a transaction
       addTransaction(data: Omit<Transaction, 'id'>): void {
