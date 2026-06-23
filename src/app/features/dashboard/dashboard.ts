@@ -1,10 +1,9 @@
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { TransactionService } from '../../core/services/transaction.service';
-import { Transaction } from '../../core/models/transaction.model';
+import { Transaction, TypeOfTransaction } from '../../core/models/transaction.model';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { TypeOfTransaction } from '../../core/models/transaction.model';
-import { TitleCasePipe } from '@angular/common';
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -16,11 +15,11 @@ export class Dashboard {
   service = inject(TransactionService);
   fb = inject(FormBuilder);
 
-  readonly TransactionType: TypeOfTransaction[] = ['income', 'expense'];
+  transactionTypes: TypeOfTransaction[] = ['income', 'expense'];
 
   form = this.fb.group({
     amount: [null as number | null, [Validators.required, Validators.min(0.01)]],
-    category: ['', Validators.required, Validators.maxLength(50)],
+    category: ['', [Validators.required, Validators.maxLength(50)]],
     type: ['' as TypeOfTransaction | '', Validators.required],
     date: ['', Validators.required],
     description: ['', Validators.maxLength(200)],
@@ -40,19 +39,10 @@ export class Dashboard {
 
     this.form.reset();
   }
-  get amount() {
-    return this.form.get('amount');
-  }
-  get category() {
-    return this.form.get('category');
-  }
-  get type() {
-    return this.form.get('type');
-  }
-  get date() {
-    return this.form.get('date');
-  }
-  get description() {
-    return this.form.get('description');
-  }
+
+  get amount() { return this.form.get('amount')!; }
+  get category() { return this.form.get('category')!; }
+  get type() { return this.form.get('type')!; }
+  get date() { return this.form.get('date')!; }
+  get description() { return this.form.get('description')!; }
 }

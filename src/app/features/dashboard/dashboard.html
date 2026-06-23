@@ -40,7 +40,7 @@
             formControlName="amount"
             placeholder="0.00"
           />
-          @if (amount?.invalid && amount.touched) {
+          @if (amount.invalid && amount.touched) {
             <span class="error">
               @if (amount.hasError('required')) { Amount is required }
               @if (amount.hasError('min')) { Must be greater than 0 }
@@ -56,7 +56,7 @@
             formControlName="category"
             placeholder="e.g. Groceries"
           />
-          @if (category?.invalid && category.touched) {
+          @if (category.invalid && category.touched) {
             <span class="error">
               @if (category.hasError('required')) { Category is required }
               @if (category.hasError('maxlength')) { Max 30 characters }
@@ -70,11 +70,11 @@
           <label for="type">Type</label>
           <select id="type" formControlName="type">
             <option value="" disabled>Select type</option>
-            @for (t of TransactionType; track t) {
+            @for (t of transactionTypes; track t) {
               <option [value]="t">{{ t | titlecase }}</option>
             }
           </select>
-          @if (type?.invalid && type.touched) {
+          @if (type.invalid && type.touched) {
             <span class="error">Type is required</span>
           }
         </div>
@@ -82,7 +82,7 @@
         <div class="form-field">
           <label for="date">Date</label>
           <input id="date" type="date" formControlName="date" />
-          @if (date?.invalid && date.touched) {
+          @if (date.invalid && date.touched) {
             <span class="error">Date is required</span>
           }
         </div>
