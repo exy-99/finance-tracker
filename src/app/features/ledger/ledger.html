@@ -1,1 +1,39 @@
-<p>ledger works!</p>
+<div class="ledger">
+  <h1 class="ledger-title">Ledger</h1>
+
+  <div class="filter-bar">
+    <label for="filter">Filter:</label>
+    <select id="filter" class="filter-select" (change)="onFilterChange($event)">
+      @for (option of filterOption; track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+      }
+    </select>
+  </div>
+
+  @if (filterTransactions().length > 0) {
+    <ul class="transaction-list">
+      @for (t of filterTransactions(); track t.id) {
+        <li class="transaction-item" [class.transaction-item--income]="t.type === 'income'" [class.transaction-item--expense]="t.type === 'expense'">
+          <div class="transaction-main">
+            <div class="transaction-info">
+              <span class="transaction-desc">{{ t.description || t.category }}</span>
+              <span class="transaction-category">{{ t.category }}</span>
+            </div>
+            <span class="transaction-amount" [class.transaction-amount--income]="t.type === 'income'" [class.transaction-amount--expense]="t.type === 'expense'">
+              {{ t.amount | currency }}
+            </span>
+          </div>
+          <div class="transaction-footer">
+            <span class="transaction-date">{{ t.date | date:'mediumDate' }}</span>
+            <button type="button" class="btn-delete" (click)="onDelete(t.id)">Delete</button>
+          </div>
+        </li>
+      }
+    </ul>
+  } @else {
+    <div class="empty-state">
+      <p>No transactions match this filter.</p>
+      <p class="empty-hint">Try selecting "All Types" or add a new transaction.</p>
+    </div>
+  }
+</div>

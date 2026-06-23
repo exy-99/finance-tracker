@@ -10,7 +10,11 @@ pathMatch : 'full'
   path : 'dashboard',
   loadComponent :() => import ('./features/dashboard/dashboard')
   .then(m => m.Dashboard)
-}
-
+},
+{
+    path: 'ledger',
+    loadComponent: () => import('./features/ledger/ledger')
+      .then(m => m.Ledger)
+  }
 
 ];
