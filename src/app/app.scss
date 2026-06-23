@@ -16,7 +16,9 @@
 
 .nav-links {
   display: flex;
-  gap: var(--space-6);
+  gap: 5px;
+    justify-content: space-between;
+
 
   a {
     text-decoration: none;
