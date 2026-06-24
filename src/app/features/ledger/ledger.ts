@@ -3,11 +3,12 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { TransactionService } from '../../core/services/transaction.service';
 import { Transaction, TypeOfTransaction } from '../../core/models/transaction.model';
 import { HighlightTransactionDirective } from '../../shared/directives/highlight-transaction';
+import { CategoryIconPipe } from '../../shared/pipes/category-icon-pipe';
 
 type FilterType = 'all' | TypeOfTransaction;
 @Component({
   selector: 'app-ledger',
-  imports: [CurrencyPipe, DatePipe, HighlightTransactionDirective ],
+  imports: [CurrencyPipe, DatePipe, HighlightTransactionDirective , CategoryIconPipe ],
   templateUrl: './ledger.html',
   styleUrl: './ledger.scss',
 })

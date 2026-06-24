@@ -16,8 +16,8 @@
         <li class="transaction-item" [appHighlightTransaction]="t.type === 'income' ? 'income' : 'expense' ">
           <div class="transaction-main">
             <div class="transaction-info">
-              <span class="transaction-desc">{{ t.description || t.category }}</span>
-              <span class="transaction-category">{{ t.category }}</span>
+              <span class="transaction-desc">{{ t.description || t.category |categoryIcon}}</span>
+              <span class="transaction-category">{{ t.category |categoryIcon}}</span>
             </div>
             <span class="transaction-amount" [class.transaction-amount--income]="t.type === 'income'" [class.transaction-amount--expense]="t.type === 'expense'">
               {{ t.amount | currency }}
