@@ -2,11 +2,12 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { TransactionService } from '../../core/services/transaction.service';
 import { Transaction, TypeOfTransaction } from '../../core/models/transaction.model';
+import { HighlightTransactionDirective } from '../../shared/directives/highlight-transaction';
 
 type FilterType = 'all' | TypeOfTransaction;
 @Component({
   selector: 'app-ledger',
-  imports: [CurrencyPipe, DatePipe],
+  imports: [CurrencyPipe, DatePipe, HighlightTransactionDirective ],
   templateUrl: './ledger.html',
   styleUrl: './ledger.scss',
 })

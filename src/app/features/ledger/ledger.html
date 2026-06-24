@@ -13,7 +13,7 @@
   @if (filterTransactions().length > 0) {
     <ul class="transaction-list">
       @for (t of filterTransactions(); track t.id) {
-        <li class="transaction-item" [class.transaction-item--income]="t.type === 'income'" [class.transaction-item--expense]="t.type === 'expense'">
+        <li class="transaction-item" [appHighlightTransaction]="t.type === 'income' ? 'income' : 'expense' ">
           <div class="transaction-main">
             <div class="transaction-info">
               <span class="transaction-desc">{{ t.description || t.category }}</span>
