@@ -3,11 +3,16 @@
 // Theme: Deep slate background + glass cards + emerald/rose accents
 // ==========================================================================
 
-@use "sass:color";
+@use 'sass:color';
 
 // ---------------------------------------------------------------- Tokens
-$font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
-$font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+$font-sans:
+  'Inter',
+  'Segoe UI',
+  system-ui,
+  -apple-system,
+  sans-serif;
+$font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
 
 $radius-sm: 8px;
 $radius-md: 14px;
@@ -16,8 +21,9 @@ $radius-pill: 999px;
 
 $shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
 $shadow-md: 0 10px 30px rgba(0, 0, 0, 0.35);
-$shadow-glow: 0 0 0 1px rgba(255, 255, 255, 0.06),
-              0 8px 32px rgba(0, 0, 0, 0.35);
+$shadow-glow:
+  0 0 0 1px rgba(255, 255, 255, 0.06),
+  0 8px 32px rgba(0, 0, 0, 0.35);
 
 $ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -53,11 +59,7 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
 // ---------------------------------------------------------------- Mixins
 @mixin glass {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.05),
-    rgba(255, 255, 255, 0.02)
-  );
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   border: 1px solid var(--border);
@@ -100,7 +102,7 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   color: var(--text);
   background:
     radial-gradient(1200px 600px at 10% -10%, rgba(108, 140, 255, 0.18), transparent 60%),
-    radial-gradient(900px 500px at 100% 0%, rgba(46, 229, 157, 0.10), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(46, 229, 157, 0.1), transparent 60%),
     radial-gradient(800px 500px at 50% 110%, rgba(139, 124, 255, 0.12), transparent 60%),
     linear-gradient(180deg, var(--bg-0), var(--bg-1));
   background-attachment: fixed;
@@ -117,14 +119,14 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   font-size: clamp(28px, 4vw, 40px);
   font-weight: 700;
   letter-spacing: -0.02em;
-  background: linear-gradient(120deg, #ffffff 30%, #b8c0e0 100%);
+  background: linear-gradient(120deg, #151515 30%, #b8c0e0 100%);
   -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-          color: transparent;
+  color: black;
 
   &::after {
-    content: "";
+    content: '';
     display: block;
     width: 56px;
     height: 3px;
@@ -149,29 +151,32 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
   padding: 22px 22px 24px;
   overflow: hidden;
-  transition: transform 0.4s $ease-out, box-shadow 0.4s $ease-out, border-color 0.4s $ease-out;
+  transition:
+    transform 0.4s $ease-out,
+    box-shadow 0.4s $ease-out,
+    border-color 0.4s $ease-out;
 
   // Soft tinted glow per card type
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0);
-            mask:
+    mask:
       linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
-            mask-composite: exclude;
+    mask-composite: exclude;
     pointer-events: none;
   }
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: -40%;
     right: -20%;
@@ -195,15 +200,21 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   &--income {
-    &::after { background: var(--income); }
+    &::after {
+      background: var(--income);
+    }
   }
 
   &--expense {
-    &::after { background: var(--expense); }
+    &::after {
+      background: var(--expense);
+    }
   }
 
   &--balance {
-    &::after { background: var(--balance); }
+    &::after {
+      background: var(--balance);
+    }
   }
 }
 
@@ -219,7 +230,7 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   gap: 8px;
 
   &::before {
-    content: "";
+    content: '';
     width: 8px;
     height: 8px;
     border-radius: 50%;
@@ -228,9 +239,18 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 }
 
-.card--income .card-label::before { background: var(--income); box-shadow: 0 0 0 4px var(--income-soft); }
-.card--expense .card-label::before { background: var(--expense); box-shadow: 0 0 0 4px var(--expense-soft); }
-.card--balance .card-label::before { background: var(--balance); box-shadow: 0 0 0 4px var(--balance-soft); }
+.card--income .card-label::before {
+  background: var(--income);
+  box-shadow: 0 0 0 4px var(--income-soft);
+}
+.card--expense .card-label::before {
+  background: var(--expense);
+  box-shadow: 0 0 0 4px var(--expense-soft);
+}
+.card--balance .card-label::before {
+  background: var(--balance);
+  box-shadow: 0 0 0 4px var(--balance-soft);
+}
 
 .card-value {
   margin: 0;
@@ -240,24 +260,24 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   font-variant-numeric: tabular-nums;
   background: linear-gradient(180deg, #ffffff, #c8cee8);
   -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-          color: transparent;
+  color: transparent;
 
   &--income {
     background: linear-gradient(180deg, #5ff5bd, #1ec98a);
     -webkit-background-clip: text;
-            background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
-            color: transparent;
+    color: transparent;
   }
 
   &--expense {
     background: linear-gradient(180deg, #ff8aa0, #e64565);
     -webkit-background-clip: text;
-            background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
-            color: transparent;
+    color: transparent;
   }
 }
 
@@ -275,7 +295,7 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   gap: 10px;
 
   &::before {
-    content: "";
+    content: '';
     width: 4px;
     height: 18px;
     border-radius: 2px;
@@ -320,8 +340,8 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   input,
   select {
     -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     width: 100%;
     padding: 12px 14px;
     font-family: inherit;
@@ -330,7 +350,10 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    transition: border-color 0.2s $ease-out, background 0.2s $ease-out, box-shadow 0.2s $ease-out;
+    transition:
+      border-color 0.2s $ease-out,
+      background 0.2s $ease-out,
+      box-shadow 0.2s $ease-out;
     @include focus-ring;
 
     &::placeholder {
@@ -345,32 +368,33 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   // Custom select chevron
   select {
-    background-image:
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%239aa3bf' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%239aa3bf' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
     background-repeat: no-repeat;
     background-position: right 14px center;
     padding-right: 40px;
   }
 
   // Hide number input spinners (cleaner look)
-  input[type="number"] {
+  input[type='number'] {
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
-              appearance: none;
+      appearance: none;
       margin: 0;
     }
     -moz: textfield;
   }
 
   // Style native date picker indicator
-  input[type="date"]::-webkit-calendar-picker-indicator {
+  input[type='date']::-webkit-calendar-picker-indicator {
     filter: invert(0.7);
     cursor: pointer;
     opacity: 0.8;
     transition: opacity 0.2s;
 
-    &:hover { opacity: 1; }
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 
@@ -384,7 +408,7 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   color: var(--danger);
 
   &::before {
-    content: "!";
+    content: '!';
     display: inline-grid;
     place-items: center;
     width: 16px;
@@ -413,7 +437,11 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   border: 1px solid transparent;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: transform 0.15s $ease-out, background 0.2s $ease-out, box-shadow 0.2s $ease-out, opacity 0.2s;
+  transition:
+    transform 0.15s $ease-out,
+    background 0.2s $ease-out,
+    box-shadow 0.2s $ease-out,
+    opacity 0.2s;
   user-select: none;
 
   &:active:not(:disabled) {
@@ -471,7 +499,10 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid transparent;
-  transition: background 0.2s $ease-out, border-color 0.2s $ease-out, transform 0.2s $ease-out;
+  transition:
+    background 0.2s $ease-out,
+    border-color 0.2s $ease-out,
+    transform 0.2s $ease-out;
 
   &:hover {
     background: rgba(255, 255, 255, 0.06);
@@ -549,7 +580,7 @@ $ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 // Empty state (apply when list is empty)
 // ==========================================================================
 .transaction-list:empty::after {
-  content: "No transactions yet — add one above ✨";
+  content: 'No transactions yet — add one above ✨';
   display: block;
   padding: 48px 16px;
   text-align: center;
