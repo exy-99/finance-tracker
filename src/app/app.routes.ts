@@ -15,6 +15,11 @@ pathMatch : 'full'
     path: 'ledger',
     loadComponent: () => import('./features/ledger/ledger')
       .then(m => m.Ledger)
+  },
+  {
+    path: 'analytics',
+    loadComponent: () => import('./features/analytics/analytics')
+      .then(m => m.AnalyticsComponent)
   }
 
 ];
